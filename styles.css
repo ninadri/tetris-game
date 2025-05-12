@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(10, 10, 10);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 80vh;
+}
+
+h2 {
+  color: white;
+}
+
+#tetris {
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* animation */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+}
