@@ -66,3 +66,16 @@ function generateRandomPiece() {
   let y = 0;
   return { piece, x, y, colorIndex };
 }
+
+renderPiece();
+function renderPiece() {
+  let piece = pieceObj.piece;
+  for (let i = 0; i < piece.length; i++) {
+    for (let j = 0; j < piece[i].length; j++) {
+      if (piece[i][j] == 1) {
+        ctx.fillStyle = COLORS[pieceObj.colorIndex];
+        ctx.fillRect(pieceObj.x + j, i, 1, 1);
+      }
+    }
+  }
+}
