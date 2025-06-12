@@ -54,12 +54,10 @@ let canvas = document.querySelector("#tetris");
 let ctx = canvas.getContext("2d");
 ctx.scale(30, 30);
 
-let pieceObj = generateRandomPiece();
-console.log(pieceObj);
+let pieceObj = null;
+
 function generateRandomPiece() {
   let ran = Math.floor(Math.random() * 7);
-  // console.log(SHAPES[ran]);
-
   let piece = SHAPES[ran];
   let colorIndex = ran + 1;
   let x = 4;
@@ -67,15 +65,40 @@ function generateRandomPiece() {
   return { piece, x, y, colorIndex };
 }
 
-renderPiece();
+setInterval(newGameState, 500);
+
+function newGameState() {
+  if (pieceObj == null) {
+    pieceObj = generateRandomPiece();
+    renderPiece();
+  }
+  moveDown();
+}
+
 function renderPiece() {
   let piece = pieceObj.piece;
   for (let i = 0; i < piece.length; i++) {
     for (let j = 0; j < piece[i].length; j++) {
       if (piece[i][j] == 1) {
         ctx.fillStyle = COLORS[pieceObj.colorIndex];
-        ctx.fillRect(pieceObj.x + j, i, 1, 1);
+        ctx.fillRect(pieceObj.x + j, pieceObj.y + i, 1, 1);
       }
     }
   }
+}
+
+function moveDown() {
+  pieceObj.y += 1;
+  renderPiece();
+}
+
+function generateGrid() {
+  let grid = [];
+  for (let i = 0; i < ROWS; i++) {
+    grid.push([]);
+    for (let j = 0; j < COLS; j++) {
+      grid[i].push(i);
+    }
+  }
+  return grid;
 }
