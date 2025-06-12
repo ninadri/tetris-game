@@ -55,6 +55,7 @@ let ctx = canvas.getContext("2d");
 ctx.scale(30, 30);
 
 let pieceObj = null;
+let grid = generateGrid();
 
 function generateRandomPiece() {
   let ran = Math.floor(Math.random() * 7);
@@ -89,16 +90,27 @@ function renderPiece() {
 
 function moveDown() {
   pieceObj.y += 1;
-  renderPiece();
+  renderGrid();
 }
 
 function generateGrid() {
   let grid = [];
+
   for (let i = 0; i < ROWS; i++) {
     grid.push([]);
     for (let j = 0; j < COLS; j++) {
-      grid[i].push(i);
+      grid[i].push(0);
     }
   }
   return grid;
+}
+
+function renderGrid() {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      ctx.fillStyle = COLORS[grid[i][j]];
+      ctx.fillRect(j, i, 1, 1);
+    }
+  }
+  renderPiece();
 }
